@@ -216,6 +216,8 @@ EDITH is intended to be user-controlled, with clear permission boundaries for ca
 
 The software stack has not yet been finalized.
 
+**Project tracking:** [V2.4 CAD concept prerelease](https://github.com/Arnost55/E.D.I.T.H/releases/tag/v2.4-cad-preview) · [V2.5 mechanical milestone](https://github.com/Arnost55/E.D.I.T.H/milestone/1) · [Engineering issues](https://github.com/Arnost55/E.D.I.T.H/issues)
+
 ## Project Status
 
 **Current stage: Mechanical prototyping and feasibility research**

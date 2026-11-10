@@ -1,0 +1,32 @@
+name: Repository integrity
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-repository-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check research artifacts and documentation
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s README.md
+          test -s LICENSE
+          test -s CONTRIBUTING.md
+          test -s cad/edith-v2.4.kcad.ts
+          test -s cad/edith-glasses-v2.4.step
+          test -s docs/research/adaptive-optics.md
+          for image in images/edith-v2.4-{front,iso,side,exploded}.png; do
+            test -s "$image"
+            file --mime-type "$image" | grep -q 'image/png'
+            grep -Fq "$image" README.md
+          done
+          echo "Repository documentation and image assets are present."
+
+# This checks repository completeness, not CAD validity, hardware safety, or optical performance.

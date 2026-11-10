@@ -1,0 +1,12 @@
+# Preserve text/binary handling for mechanical and documentation assets
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.kcad.ts text eol=lf
+*.step binary
+*.stp binary
+*.stl binary
+*.3mf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
