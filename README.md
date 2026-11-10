@@ -142,6 +142,12 @@ Current modeled elements include:
 The CAD model includes an assembled concept and a separate prototype parts layout.
 
 
+### V2.5 3D-printable fit prototype
+
+A separate [EDITH V2.5 print-fit model](https://app.kernelcad.com/p/7UDN0k4A?version=1) is available for the Bambu Lab A1 mini, based on the V2.4 design. It contains **nine individually exportable parts**: a front frame, two temple shells with provisional M2 hinge knuckles, four cover fit gauges, and two nose-pad gauges. The editable [V2.5 kernelCAD source](cad/edith-v2.5-print-kit.kcad.ts) and [printing guide](cad/EDITH_V2.5_PRINT_GUIDE.md) are included in this repository.
+
+This is an **untested mechanical fit study**, not certified eyewear. All individual STL parts were exported watertight and fit within the printer's 180 mm build volume after reorientation, but printed hinge tolerances, assembly, comfort and durability still require physical verification.
+
 ### V2.4 CAD gallery
 
 These images are renders of the [kernelCAD V2.4 concept source](cad/edith-v2.4.kcad.ts), **not photographs of working hardware**.
