@@ -141,6 +141,17 @@ Current modeled elements include:
 
 The CAD model includes an assembled concept and a separate prototype parts layout.
 
+
+### Source files and reproducibility
+
+- [Editable kernelCAD V2.4 source](cad/edith-v2.4.kcad.ts) — pinned to [kernelCAD revision 16](https://app.kernelcad.com/p/Ru_P5aCU?version=16).
+- [STEP geometry export](cad/edith-glasses-v2.4.step) — provided for CAD inspection and mechanical reference; export equivalence has not been independently checked.
+- [CAD usage notes](cad/README.md) — explains the conceptual model and current mechanical limitations.
+- [Adaptive optics research plan](docs/research/adaptive-optics.md) — requirements and experiments, not validated vision correction.
+- [Visual asset plan](images/README.md) — future verified CAD render gallery.
+
+**Version note:** The linked source is pinned to the V2.4 revision. Later experiments in the kernelCAD workspace may have different version numbers; this repository does not automatically synchronize with them.
+
 ### 3D Printing
 
 The initial physical fit-check workflow targets the **Bambu Lab A1 mini**.
@@ -290,7 +301,7 @@ Contributions, technical feedback, and collaboration proposals are welcome in ar
 - AR software.
 - Power management and thermal engineering.
 
-Please open a GitHub issue to discuss substantial changes before beginning implementation.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) and open a GitHub issue to discuss substantial changes before beginning implementation. The project is not currently distributed under an open-source license.
 
 ## Disclaimer
 
@@ -304,7 +315,7 @@ References to third-party technologies or design inspirations do not imply endor
 
 ## License
 
-A project license has not yet been selected.
+A project license has not yet been selected. See [LICENSE](LICENSE) for the temporary all-rights-reserved notice.
 
 Until a license is published, the repository's contents should not be assumed to be open-source licensed.
 
