@@ -1,13 +1,14 @@
-# EDITH image assets
+# EDITH V2.4 CAD image assets
 
-This folder is reserved for **verified** renders and photographs of the EDITH prototypes.
+These are permanent **kernelCAD-generated concept renders**, based on [pinned V2.4 source revision 16](https://app.kernelcad.com/p/Ru_P5aCU?version=16).
 
-The [kernelCAD V2.4 viewer](https://app.kernelcad.com/p/Ru_P5aCU?version=16) currently provides the canonical interactive model. Permanent PNGs have **not** yet been committed here.
+| File | View |
+| --- | --- |
+| [edith-v2.4-iso.png](edith-v2.4-iso.png) | Three-quarter view of the assembled eyewear concept |
+| [edith-v2.4-front.png](edith-v2.4-front.png) | Front elevation of assembled eyewear |
+| [edith-v2.4-side.png](edith-v2.4-side.png) | Side elevation showing temple housing |
+| [edith-v2.4-exploded.png](edith-v2.4-exploded.png) | Separate nine-piece exploded 3D-print fit kit |
 
-Suggested assets to add after export and visual review:
+**Important:** Renders show proposed geometry only. They are not physical prototype photographs or evidence of functioning AR displays, prescription correction, electronics, hinge mechanisms, or thermal performance.
 
-- `edith-v2.4-front.png` — front elevation of assembled glasses
-- `edith-v2.4-side.png` — side elevation with temple and electronics envelope
-- `edith-v2.4-exploded.png` — exploded prototype fit-kit view
-
-Label rendered concepts clearly; do not present untested geometry as a physical working prototype. Add verified images to the main README gallery when available.
+The source and STEP files are in [cad/](../cad/).

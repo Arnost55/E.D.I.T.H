@@ -142,13 +142,27 @@ Current modeled elements include:
 The CAD model includes an assembled concept and a separate prototype parts layout.
 
 
+### V2.4 CAD gallery
+
+These images are renders of the [kernelCAD V2.4 concept source](cad/edith-v2.4.kcad.ts), **not photographs of working hardware**.
+
+| Assembled three-quarter view | Front elevation |
+| --- | --- |
+| ![EDITH V2.4 CAD three-quarter render](images/edith-v2.4-iso.png) | ![EDITH V2.4 CAD front elevation](images/edith-v2.4-front.png) |
+
+| Side elevation | Exploded fit-kit study |
+| --- | --- |
+| ![EDITH V2.4 CAD side elevation](images/edith-v2.4-side.png) | ![EDITH V2.4 exploded printable fit kit](images/edith-v2.4-exploded.png) |
+
+The exploded view is a conceptual print-fit kit; its components are not a validated assembled product.
+
 ### Source files and reproducibility
 
 - [Editable kernelCAD V2.4 source](cad/edith-v2.4.kcad.ts) — pinned to [kernelCAD revision 16](https://app.kernelcad.com/p/Ru_P5aCU?version=16).
 - [STEP geometry export](cad/edith-glasses-v2.4.step) — provided for CAD inspection and mechanical reference; export equivalence has not been independently checked.
 - [CAD usage notes](cad/README.md) — explains the conceptual model and current mechanical limitations.
 - [Adaptive optics research plan](docs/research/adaptive-optics.md) — requirements and experiments, not validated vision correction.
-- [Visual asset plan](images/README.md) — future verified CAD render gallery.
+- [CAD render assets](images/README.md) — front, side, three-quarter, and exploded views.
 
 **Version note:** The linked source is pinned to the V2.4 revision. Later experiments in the kernelCAD workspace may have different version numbers; this repository does not automatically synchronize with them.
 
