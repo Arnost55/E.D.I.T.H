@@ -98,12 +98,12 @@ class _EdithHomePageState extends ConsumerState<EdithHomePage> {
         body: SafeArea(
           child: IndexedStack(
             index: _selectedIndex,
-            children: const [
+            children: [
               DashboardPage(),
-              AssistantPage(),
-              VisionPage(),
-              ProtectionPage(),
-              SettingsPage(),
+              AssistantPage(onBack: () => _onDestinationSelected(0)),
+              VisionPage(onBack: () => _onDestinationSelected(0)),
+              ProtectionPage(onBack: () => _onDestinationSelected(0)),
+              SettingsPage(onBack: () => _onDestinationSelected(0)),
             ],
           ),
         ),
