@@ -10,13 +10,13 @@ final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
 /// Simulation configuration that controls all simulation behaviors
 class SimulationConfig {
   const SimulationConfig({
-    this.enabled = true,
-    this.simulateBattery = true,
-    this.simulateConnectivity = true,
-    this.simulateVision = true,
-    this.simulateAIEngine = true,
-    this.simulateThreats = true,
-    this.simulateSensors = true,
+    this.enabled = false,
+    this.simulateBattery = false,
+    this.simulateConnectivity = false,
+    this.simulateVision = false,
+    this.simulateAIEngine = false,
+    this.simulateThreats = false,
+    this.simulateSensors = false,
     this.updateIntervalMs = 1000,
     this.simulationSpeed = 1.0,
   });
@@ -95,13 +95,13 @@ class SimulationConfigNotifier extends StateNotifier<SimulationConfig> {
   final SharedPreferences _prefs;
 
   Future<void> _loadConfig() async {
-    final enabled = _prefs.getBool('${_prefsKey}_enabled') ?? true;
-    final simulateBattery = _prefs.getBool('${_prefsKey}_battery') ?? true;
-    final simulateConnectivity = _prefs.getBool('${_prefsKey}_connectivity') ?? true;
-    final simulateVision = _prefs.getBool('${_prefsKey}_vision') ?? true;
-    final simulateAIEngine = _prefs.getBool('${_prefsKey}_ai_engine') ?? true;
-    final simulateThreats = _prefs.getBool('${_prefsKey}_threats') ?? true;
-    final simulateSensors = _prefs.getBool('${_prefsKey}_sensors') ?? true;
+    final enabled = _prefs.getBool('${_prefsKey}_enabled') ?? false;
+    final simulateBattery = _prefs.getBool('${_prefsKey}_battery') ?? false;
+    final simulateConnectivity = _prefs.getBool('${_prefsKey}_connectivity') ?? false;
+    final simulateVision = _prefs.getBool('${_prefsKey}_vision') ?? false;
+    final simulateAIEngine = _prefs.getBool('${_prefsKey}_ai_engine') ?? false;
+    final simulateThreats = _prefs.getBool('${_prefsKey}_threats') ?? false;
+    final simulateSensors = _prefs.getBool('${_prefsKey}_sensors') ?? false;
     final updateIntervalMs = _prefs.getInt('${_prefsKey}_interval') ?? 1000;
     final simulationSpeed = _prefs.getDouble('${_prefsKey}_speed') ?? 1.0;
 
