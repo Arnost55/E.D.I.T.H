@@ -7,7 +7,8 @@ import 'providers/vision_providers.dart';
 import '../../core/theme/edith_theme.dart';
 
 class VisionPage extends ConsumerStatefulWidget {
-  const VisionPage({super.key});
+  const VisionPage({super.key, this.onBack});
+  final VoidCallback? onBack;
 
   @override
   ConsumerState<VisionPage> createState() => _VisionPageState();
@@ -120,6 +121,8 @@ class _VisionPageState extends ConsumerState<VisionPage> {
           ),
           child: Row(
             children: [
+              if (widget.onBack != null)
+                IconButton(tooltip: 'Back to dashboard', onPressed: widget.onBack, icon: const Icon(Icons.arrow_back, color: Colors.white)),
               // Title
               Text(
                 'VISION SYSTEM',
