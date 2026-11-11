@@ -7,7 +7,8 @@ import 'providers/protection_providers.dart';
 import '../../core/theme/edith_theme.dart';
 
 class ProtectionPage extends ConsumerStatefulWidget {
-  const ProtectionPage({super.key});
+  const ProtectionPage({super.key, this.onBack});
+  final VoidCallback? onBack;
 
   @override
   ConsumerState<ProtectionPage> createState() => _ProtectionPageState();
@@ -75,6 +76,10 @@ class _ProtectionPageState extends ConsumerState<ProtectionPage> {
       ),
       child: Row(
         children: [
+          if (widget.onBack != null) ...[
+            IconButton(tooltip: 'Back to dashboard', onPressed: widget.onBack, icon: const Icon(Icons.arrow_back)),
+            const SizedBox(width: 4),
+          ],
           // Title and status
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
