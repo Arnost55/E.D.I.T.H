@@ -16,15 +16,11 @@ class VisionPage extends ConsumerStatefulWidget {
 class _VisionPageState extends ConsumerState<VisionPage> {
   bool _showControls = true;
 
-  @override
-  void initState() {
-    super.initState();
-    _requestCameraPermission();
-  }
-
   Future<void> _requestCameraPermission() async {
     final status = await Permission.camera.request();
-    ref.read(visionStatusProvider.notifier).setCameraPermission(status.isGranted);
+    ref
+        .read(visionStatusProvider.notifier)
+        .setCameraPermission(status.isGranted);
   }
 
   void _toggleControls() {
@@ -139,19 +135,25 @@ class _VisionPageState extends ConsumerState<VisionPage> {
               _buildStatusBadge(
                 'CAM',
                 status.cameraPermission ? 'OK' : 'DENIED',
-                status.cameraPermission ? EdithColors.statusLive : EdithColors.statusError,
+                status.cameraPermission
+                    ? EdithColors.statusLive
+                    : EdithColors.statusError,
               ),
               const SizedBox(width: 8),
               _buildStatusBadge(
                 'HUD',
                 status.isActive ? 'ACTIVE' : 'STANDBY',
-                status.isActive ? EdithColors.statusLive : EdithColors.statusWarning,
+                status.isActive
+                    ? EdithColors.statusLive
+                    : EdithColors.statusWarning,
               ),
               const SizedBox(width: 8),
               _buildStatusBadge(
                 'REC',
                 status.isRecording ? 'ON' : 'OFF',
-                status.isRecording ? EdithColors.statusError : EdithColors.textMuted,
+                status.isRecording
+                    ? EdithColors.statusError
+                    : EdithColors.textMuted,
               ),
             ],
           ),
@@ -199,7 +201,9 @@ class _VisionPageState extends ConsumerState<VisionPage> {
                         activeColor: EdithColors.accent,
                         inactiveColor: EdithColors.panelBorder,
                         thumbColor: EdithColors.accentStrong,
-                        onChanged: (value) => ref.read(visionStatusProvider.notifier).setZoom(value),
+                        onChanged: (value) => ref
+                            .read(visionStatusProvider.notifier)
+                            .setZoom(value),
                       ),
                     ),
                     Icon(
@@ -225,10 +229,16 @@ class _VisionPageState extends ConsumerState<VisionPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   _buildControlButton(
-                    icon: status.isRecording ? Icons.stop_circle_outlined : Icons.videocam_outlined,
+                    icon: status.isRecording
+                        ? Icons.stop_circle_outlined
+                        : Icons.videocam_outlined,
                     label: status.isRecording ? 'STOP' : 'RECORD',
-                    color: status.isRecording ? EdithColors.statusError : EdithColors.accent,
-                    onPressed: () => ref.read(visionStatusProvider.notifier).toggleRecording(),
+                    color: status.isRecording
+                        ? EdithColors.statusError
+                        : EdithColors.accent,
+                    onPressed: () => ref
+                        .read(visionStatusProvider.notifier)
+                        .toggleRecording(),
                   ),
                   _buildControlButton(
                     icon: Icons.camera_alt_outlined,
@@ -263,10 +273,7 @@ class _VisionPageState extends ConsumerState<VisionPage> {
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: color.withValues(alpha: 0.4),
-          width: 1,
-        ),
+        border: Border.all(color: color.withValues(alpha: 0.4), width: 1),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -307,10 +314,7 @@ class _VisionPageState extends ConsumerState<VisionPage> {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: EdithColors.panel,
-            border: Border.all(
-              color: color.withValues(alpha: 0.5),
-              width: 1.5,
-            ),
+            border: Border.all(color: color.withValues(alpha: 0.5), width: 1.5),
             boxShadow: [
               BoxShadow(
                 color: color.withValues(alpha: 0.2),
@@ -390,7 +394,10 @@ class _VisionPageState extends ConsumerState<VisionPage> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: EdithColors.accent,
                   foregroundColor: EdithColors.background,
-                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 16,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -410,7 +417,9 @@ class _VisionPageState extends ConsumerState<VisionPage> {
       SnackBar(
         content: Text(
           'Photo captured',
-          style: EdithTypography.bodyMedium.copyWith(color: EdithColors.background),
+          style: EdithTypography.bodyMedium.copyWith(
+            color: EdithColors.background,
+          ),
         ),
         backgroundColor: EdithColors.accent,
         behavior: SnackBarBehavior.floating,
@@ -431,7 +440,9 @@ class _VisionPageState extends ConsumerState<VisionPage> {
       SnackBar(
         content: Text(
           'Night vision toggled',
-          style: EdithTypography.bodyMedium.copyWith(color: EdithColors.background),
+          style: EdithTypography.bodyMedium.copyWith(
+            color: EdithColors.background,
+          ),
         ),
         backgroundColor: EdithColors.statusLive,
         behavior: SnackBarBehavior.floating,
@@ -464,7 +475,10 @@ class _CameraFeedPainter extends CustomPainter {
       for (int y = 0; y < size.height; y += 4) {
         for (int x = 0; x < size.width; x += 4) {
           if ((x + y) % 8 == 0) {
-            canvas.drawRect(Rect.fromLTWH(x.toDouble(), y.toDouble(), 2, 2), noisePaint);
+            canvas.drawRect(
+              Rect.fromLTWH(x.toDouble(), y.toDouble(), 2, 2),
+              noisePaint,
+            );
           }
         }
       }
@@ -484,17 +498,21 @@ class _CameraFeedPainter extends CustomPainter {
         textDirection: TextDirection.ltr,
       );
       textPainter.layout();
-      textPainter.paint(canvas, Offset(
-        (size.width - textPainter.width) / 2,
-        (size.height - textPainter.height) / 2,
-      ));
+      textPainter.paint(
+        canvas,
+        Offset(
+          (size.width - textPainter.width) / 2,
+          (size.height - textPainter.height) / 2,
+        ),
+      );
     }
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return oldDelegate is _CameraFeedPainter &&
-        (oldDelegate.isActive != isActive || oldDelegate.frameRate != frameRate);
+        (oldDelegate.isActive != isActive ||
+            oldDelegate.frameRate != frameRate);
   }
 }
 
@@ -512,11 +530,7 @@ class _ScanLinesPainter extends CustomPainter {
 
     const spacing = 4.0;
     for (double y = 0; y < size.height; y += spacing) {
-      canvas.drawLine(
-        Offset(0, y),
-        Offset(size.width, y),
-        paint,
-      );
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
     }
   }
 
