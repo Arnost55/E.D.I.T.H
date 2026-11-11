@@ -25,40 +25,47 @@ class QuickActionButton extends StatelessWidget {
     final isEnabled = action.isEnabled;
 
     return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: isEnabled ? (onTap ?? action.onTap) : null,
-        borderRadius: BorderRadius.circular(theme.radius.md),
-        child: Container(
-          constraints: BoxConstraints(
-            minHeight: theme.touchTarget.min,
-            minWidth: expanded ? double.infinity : theme.touchTarget.min,
-          ),
-          padding: EdgeInsets.symmetric(
-            horizontal: expanded ? theme.spacing.lg : theme.spacing.md,
-            vertical: theme.spacing.md,
-          ),
-          decoration: BoxDecoration(
-            color: isEnabled
-                ? color.withValues(alpha: 0.15)
-                : theme.colors.panelBorder.withValues(alpha: 0.3),
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: isEnabled ? (onTap ?? action.onTap) : null,
             borderRadius: BorderRadius.circular(theme.radius.md),
-            border: Border.all(
-              color: isEnabled
-                  ? color.withValues(alpha: 0.5)
-                  : theme.colors.panelBorder.withValues(alpha: 0.5),
-              width: 1.5,
+            child: Container(
+              constraints: BoxConstraints(
+                minHeight: theme.touchTarget.min,
+                minWidth: expanded ? double.infinity : theme.touchTarget.min,
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: expanded ? theme.spacing.lg : theme.spacing.md,
+                vertical: theme.spacing.md,
+              ),
+              decoration: BoxDecoration(
+                color: isEnabled
+                    ? color.withValues(alpha: 0.15)
+                    : theme.colors.panelBorder.withValues(alpha: 0.3),
+                borderRadius: BorderRadius.circular(theme.radius.md),
+                border: Border.all(
+                  color: isEnabled
+                      ? color.withValues(alpha: 0.5)
+                      : theme.colors.panelBorder.withValues(alpha: 0.5),
+                  width: 1.5,
+                ),
+              ),
+              child: expanded
+                  ? _buildExpandedLayout(theme, color, isEnabled)
+                  : _buildCompactLayout(theme, color, isEnabled),
             ),
           ),
-          child: expanded
-              ? _buildExpandedLayout(theme, color, isEnabled)
-              : _buildCompactLayout(theme, color, isEnabled),
-        ),
-      ),
-    ).animate().fadeIn(duration: theme.durations.normal).slideY(begin: 0.1, end: 0);
+        )
+        .animate()
+        .fadeIn(duration: theme.durations.normal)
+        .slideY(begin: 0.1, end: 0);
   }
 
-  Widget _buildCompactLayout(EdithThemeExtension theme, Color color, bool isEnabled) {
+  Widget _buildCompactLayout(
+    EdithThemeExtension theme,
+    Color color,
+    bool isEnabled,
+  ) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -71,18 +78,16 @@ class QuickActionButton extends StatelessWidget {
               size: 28,
             ),
             if (action.badge != null)
-              Positioned(
-                right: -6,
-                top: -6,
-                child: _buildBadge(theme),
-              ),
+              Positioned(right: -6, top: -6, child: _buildBadge(theme)),
           ],
         ),
         SizedBox(height: theme.spacing.xs),
         Text(
           action.label,
           style: theme.typography.labelSmall.copyWith(
-            color: isEnabled ? theme.colors.textPrimary : theme.colors.textDisabled,
+            color: isEnabled
+                ? theme.colors.textPrimary
+                : theme.colors.textDisabled,
           ),
           textAlign: TextAlign.center,
           maxLines: 1,
@@ -92,7 +97,11 @@ class QuickActionButton extends StatelessWidget {
     );
   }
 
-  Widget _buildExpandedLayout(EdithThemeExtension theme, Color color, bool isEnabled) {
+  Widget _buildExpandedLayout(
+    EdithThemeExtension theme,
+    Color color,
+    bool isEnabled,
+  ) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -110,7 +119,9 @@ class QuickActionButton extends StatelessWidget {
               Text(
                 action.label,
                 style: theme.typography.titleSmall.copyWith(
-                  color: isEnabled ? theme.colors.textPrimary : theme.colors.textDisabled,
+                  color: isEnabled
+                      ? theme.colors.textPrimary
+                      : theme.colors.textDisabled,
                 ),
               ),
               if (action.requiresConfirmation) ...[
@@ -128,11 +139,7 @@ class QuickActionButton extends StatelessWidget {
         if (action.badge != null) _buildBadge(theme),
         if (action.requiresConfirmation) ...[
           SizedBox(width: theme.spacing.sm),
-          Icon(
-            Icons.help_outline,
-            color: theme.colors.textMuted,
-            size: 20,
-          ),
+          Icon(Icons.help_outline, color: theme.colors.textMuted, size: 20),
         ],
       ],
     );
@@ -144,7 +151,9 @@ class QuickActionButton extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.colors.accentStrong.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(theme.radius.round),
-        border: Border.all(color: theme.colors.accentStrong.withValues(alpha: 0.5)),
+        border: Border.all(
+          color: theme.colors.accentStrong.withValues(alpha: 0.5),
+        ),
       ),
       child: Text(
         action.badge!,
@@ -202,7 +211,7 @@ class QuickActionGrid extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
-        childAspectRatio: 1.1,
+        childAspectRatio: 1.35,
         crossAxisSpacing: theme.spacing.md,
         mainAxisSpacing: theme.spacing.md,
       ),
@@ -295,35 +304,28 @@ class QuickActionSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: theme.typography.titleMedium,
-        ),
+        Text(title, style: theme.typography.titleMedium),
         SizedBox(height: theme.spacing.md),
         switch (layout) {
           QuickActionLayout.grid => QuickActionGrid(
-              actions: actions,
-              onActionTap: onActionTap,
-              crossAxisCount: crossAxisCount,
-            ),
+            actions: actions,
+            onActionTap: onActionTap,
+            crossAxisCount: crossAxisCount,
+          ),
           QuickActionLayout.bar => QuickActionBar(
-              actions: actions,
-              onActionTap: onActionTap,
-            ),
+            actions: actions,
+            onActionTap: onActionTap,
+          ),
           QuickActionLayout.compactGrid => QuickActionGrid(
-              actions: actions,
-              onActionTap: onActionTap,
-              crossAxisCount: crossAxisCount,
-              compact: true,
-            ),
+            actions: actions,
+            onActionTap: onActionTap,
+            crossAxisCount: crossAxisCount,
+            compact: true,
+          ),
         },
       ],
     );
   }
 }
 
-enum QuickActionLayout {
-  grid,
-  bar,
-  compactGrid,
-}
+enum QuickActionLayout { grid, bar, compactGrid }
