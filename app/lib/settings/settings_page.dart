@@ -9,7 +9,8 @@ import '../../assistant/providers/assistant_providers.dart';
 import '../../core/theme/edith_theme.dart';
 
 class SettingsPage extends ConsumerWidget {
-  const SettingsPage({super.key});
+  const SettingsPage({super.key, this.onBack});
+  final VoidCallback? onBack;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -95,6 +96,10 @@ class SettingsPage extends ConsumerWidget {
   Widget _buildHeader() {
     return Row(
       children: [
+        if (onBack != null) ...[
+          IconButton(tooltip: 'Back to dashboard', onPressed: onBack, icon: const Icon(Icons.arrow_back)),
+          const SizedBox(width: 4),
+        ],
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
