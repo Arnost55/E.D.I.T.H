@@ -23,24 +23,33 @@ class SystemStatusCard extends StatelessWidget {
     final statusColor = component.status.color;
 
     return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(theme.radius.lg),
-        child: Container(
-          padding: EdgeInsets.all(compact ? theme.spacing.sm : theme.spacing.md),
-          decoration: BoxDecoration(
-            color: theme.colors.panel,
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
             borderRadius: BorderRadius.circular(theme.radius.lg),
-            border: Border.all(
-              color: compact ? theme.colors.panelBorder : statusColor.withValues(alpha: 0.3),
-              width: compact ? 1 : 1.5,
+            child: Container(
+              padding: EdgeInsets.all(
+                compact ? theme.spacing.sm : theme.spacing.md,
+              ),
+              decoration: BoxDecoration(
+                color: theme.colors.panel,
+                borderRadius: BorderRadius.circular(theme.radius.lg),
+                border: Border.all(
+                  color: compact
+                      ? theme.colors.panelBorder
+                      : statusColor.withValues(alpha: 0.3),
+                  width: compact ? 1 : 1.5,
+                ),
+              ),
+              child: compact
+                  ? _buildCompactLayout(theme, statusColor)
+                  : _buildFullLayout(theme, statusColor),
             ),
           ),
-          child: compact ? _buildCompactLayout(theme, statusColor) : _buildFullLayout(theme, statusColor),
-        ),
-      ),
-    ).animate().fadeIn(duration: theme.durations.normal).slideY(begin: 0.1, end: 0);
+        )
+        .animate()
+        .fadeIn(duration: theme.durations.normal)
+        .slideY(begin: 0.1, end: 0);
   }
 
   Widget _buildCompactLayout(EdithThemeExtension theme, Color statusColor) {
@@ -94,9 +103,13 @@ class SystemStatusCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        component.name,
-                        style: theme.typography.titleMedium,
+                      Expanded(
+                        child: Text(
+                          component.name,
+                          style: theme.typography.titleMedium,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                       SizedBox(width: theme.spacing.sm),
                       _buildDataSourceBadge(theme),
@@ -135,7 +148,11 @@ class SystemStatusCard extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusIndicator(EdithThemeExtension theme, Color color, {double size = 48}) {
+  Widget _buildStatusIndicator(
+    EdithThemeExtension theme,
+    Color color, {
+    double size = 48,
+  }) {
     return Container(
       width: size,
       height: size,
@@ -144,11 +161,7 @@ class SystemStatusCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(theme.radius.md),
         border: Border.all(color: color.withValues(alpha: 0.5), width: 1.5),
       ),
-      child: Icon(
-        component.icon,
-        color: color,
-        size: size * 0.5,
-      ),
+      child: Icon(component.icon, color: color, size: size * 0.5),
     );
   }
 
@@ -159,7 +172,10 @@ class SystemStatusCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: source.color.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(theme.radius.round),
-        border: Border.all(color: source.color.withValues(alpha: 0.5), width: 1),
+        border: Border.all(
+          color: source.color.withValues(alpha: 0.5),
+          width: 1,
+        ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -181,7 +197,10 @@ class SystemStatusCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.colors.statusError.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(theme.radius.round),
-        border: Border.all(color: theme.colors.statusError.withValues(alpha: 0.5), width: 1),
+        border: Border.all(
+          color: theme.colors.statusError.withValues(alpha: 0.5),
+          width: 1,
+        ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -190,7 +209,9 @@ class SystemStatusCard extends StatelessWidget {
           const SizedBox(width: 4),
           Text(
             'CRITICAL',
-            style: theme.typography.labelSmall.copyWith(color: theme.colors.statusError),
+            style: theme.typography.labelSmall.copyWith(
+              color: theme.colors.statusError,
+            ),
           ),
         ],
       ),
@@ -215,9 +236,16 @@ class SystemStatusCard extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailChip(EdithThemeExtension theme, String label, String value) {
+  Widget _buildDetailChip(
+    EdithThemeExtension theme,
+    String label,
+    String value,
+  ) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: EdithSpacing.sm, vertical: EdithSpacing.xs),
+      padding: EdgeInsets.symmetric(
+        horizontal: EdithSpacing.sm,
+        vertical: EdithSpacing.xs,
+      ),
       decoration: BoxDecoration(
         color: theme.colors.panelElevated,
         borderRadius: BorderRadius.circular(EdithRadius.sm),
@@ -228,11 +256,15 @@ class SystemStatusCard extends StatelessWidget {
         children: [
           Text(
             '$label: ',
-            style: theme.typography.labelSmall.copyWith(color: theme.colors.textMuted),
+            style: theme.typography.labelSmall.copyWith(
+              color: theme.colors.textMuted,
+            ),
           ),
           Text(
             value,
-            style: theme.typography.labelSmall.copyWith(color: theme.colors.textPrimary),
+            style: theme.typography.labelSmall.copyWith(
+              color: theme.colors.textPrimary,
+            ),
           ),
         ],
       ),
@@ -256,14 +288,14 @@ class SystemStatusGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.edithTheme;
-    final width = MediaQuery.of(context).size.width;
+    final width = MediaQuery.sizeOf(context).width;
 
     // Determine cross axis count based on width
     int crossAxisCount;
     if (width < 400) {
       crossAxisCount = 1;
     } else if (width < 600) {
-      crossAxisCount = 2;
+      crossAxisCount = 1;
     } else if (width < 900) {
       crossAxisCount = 3;
     } else {
