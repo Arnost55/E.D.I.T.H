@@ -8,7 +8,8 @@ import 'providers/assistant_providers.dart';
 import '../../core/theme/edith_theme.dart';
 
 class AssistantPage extends ConsumerWidget {
-  const AssistantPage({super.key});
+  const AssistantPage({super.key, this.onBack});
+  final VoidCallback? onBack;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -59,6 +60,10 @@ class AssistantPage extends ConsumerWidget {
       ),
       child: Row(
         children: [
+          if (onBack != null) ...[
+            IconButton(tooltip: 'Back to dashboard', onPressed: onBack, icon: const Icon(Icons.arrow_back)),
+            const SizedBox(width: 4),
+          ],
           // E.D.I.T.H. logo/title
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
